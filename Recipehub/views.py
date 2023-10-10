@@ -1,3 +1,4 @@
 from django.shortcuts import render
 
-# Create your views here.
+def recipe_path(request):
+    return render(request, 'blog/recipe_path.html', {})
