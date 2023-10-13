@@ -15,10 +15,11 @@
         {% for recipe in recipe_post %}
             <ARTICLE> 
                 <h2><em>{{ recipe.title }}</em></h2><link rel="stylesheet" href="{% static 'css/Recipehub.css' %}">
-                <p> <a href= "">Category: {{ recipe.category.name }} </a></p>
+                <p> Category: {{ recipe.category.name }} </p>
                 <p><em>Selling Price: {{ recipe.selling_price }}</em></p>
                 <p>Instructions: {{ recipe.instructions | linebreaksbr}}</p>
-                <time> published date: {{ recipe.published_date }}</time>
+                <p><em>Estimated Profit: ${{ recipe.formatted_profit }}</em></p>
+                <time> Published date: {{ recipe.published_date }}</time>
             </ARTICLE>
             <br>
         {% endfor %}

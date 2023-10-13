@@ -25,13 +25,14 @@ class Recipe(models.Model):
         recipe_indgredients = RecipeIngredient.objects.filter(recipe=self)
 
         for recipe_ingredient in recipe_indgredients:
-            ingredient = recipe_indgredients.ingredient 
-            quantity = float(ingredient.quantity)
-            ingredient_cost = Ingredient.cost
+            ingredient = recipe_ingredient.ingredient 
+            quantity = float(recipe_ingredient.quantity)
+            ingredient_cost = ingredient.cost
             cost_price += quantity * ingredient_cost
 
-        profit = self.selling_price - cost_price 
-        return profit 
+        profit = self.selling_price - cost_price
+        formatted_profit = "{:.2f}".format(profit)
+        return formatted_profit
 
     def publish(self):
         self.published_date=timezone.now()
