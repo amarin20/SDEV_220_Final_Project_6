@@ -1,0 +1,27 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>RecipeHub!</title>
+        <link rel="stylesheet" href="{% static 'css/Recipehub.css' %}">
+        <link href='https://fonts.googleapis.com/css?family=Kaushan Script' rel='stylesheet'>
+    </head>
+    <header>
+        <h1><a href="/">RecipeHub!</a></h1>
+    </header>
+    <br>
+    <body>
+        {% for recipe in recipe_post %}
+            <ARTICLE> 
+                <h2><em>{{ recipe.title }}</em></h2><link rel="stylesheet" href="{% static 'css/Recipehub.css' %}">
+                <p> <a href= "">Category: {{ recipe.category.name }} </a></p>
+                <p><em>Selling Price: {{ recipe.selling_price }}</em></p>
+                <p>Instructions: {{ recipe.instructions | linebreaksbr}}</p>
+                <time> published date: {{ recipe.published_date }}</time>
+            </ARTICLE>
+            <br>
+        {% endfor %}
+    </body>
+</html>
+
