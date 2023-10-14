@@ -1,0 +1,39 @@
+{% extends 'Recipehub/base.html' %}
+{% block content %}
+
+<ARTICLE> 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <h2>{{ recipe.title }}</h2>
+    <p style="font-size: 15px;"></pstyle> Category: {{ recipe.category.name }} </p> 
+    <p><em>Selling Price: {{ recipe.selling_price }}</em></p>
+    <p><em>Estimated Profit: ${{ recipe.formatted_profit }}</em></p>
+
+    <div class ="row"> 
+        <div class="column" style="background-color:#ecb8a5;">
+            <h2> Recipe Instructions: </h2>
+            <p> {{ recipe.instructions | linebreaksbr}}</p>
+        </div>
+        <div class="column" style="background-color:#eccfc3;">
+            <h2> Ingredients: </h2>
+            <ul>
+                {% for recipe_ingredient in recipe.recipe_ingredients %}
+                    <li>
+                        <span>{{ recipe_ingredient.quantity }} {{ recipe_ingredient.ingredient.name }}</span>
+                        <span class="ingredient-cost">${{ recipe_ingredient.ingredient.cost }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+                <h2> Recipe Equipment: </h2>
+                <ul>
+                {% for recipe_equipment in recipe.recipe_equipment %}
+                    <li>
+                        <span class="recipe-equipment">{{ recipe_equipment.equipment.name }} </span>
+                    </li>
+                {% endfor %}
+                </ul>
+            </div>
+        </div>
+    <time> Published date: {{ recipe.published_date }}</time>
+</ARTICLE>
+<br>
+{% endblock %}

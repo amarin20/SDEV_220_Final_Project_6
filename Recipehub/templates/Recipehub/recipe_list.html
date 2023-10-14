@@ -1,28 +1,21 @@
+{% extends 'Recipehub/base.html' %}
 {% load static %}
-
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>RecipeHub!</title>
-        <link rel="stylesheet" href="{% static 'css/Recipehub.css' %}">
-        <link href='https://fonts.googleapis.com/css?family=Kaushan Script' rel='stylesheet'>
-    </head>
-    <header>
-        <h1><a href="/">RecipeHub!</a></h1>
-    </header>
-    <br>
-    <body>
-        {% for recipe in recipe_post %}
-            <ARTICLE> 
-                <h2><em>{{ recipe.title }}</em></h2><link rel="stylesheet" href="{% static 'css/Recipehub.css' %}">
-                <p> Category: {{ recipe.category.name }} </p>
-                <p><em>Selling Price: {{ recipe.selling_price }}</em></p>
-                <p>Instructions: {{ recipe.instructions | linebreaksbr}}</p>
-                <p><em>Estimated Profit: ${{ recipe.formatted_profit }}</em></p>
-                <time> Published date: {{ recipe.published_date }}</time>
-            </ARTICLE>
-            <br>
-        {% endfor %}
-    </body>
-</html>
+{% block content %}
+<img src="{% static 'Recipehub/cupcake.jpg' %}" alt="cupcake!" width="1424" height="400">
+    <article> 
+        <h2 style="font-size:2.2vw; text-align:center;"> Welcome to RecipeHub! Store your delicious meals and calculate your profit! </h2>
+        <h2 style="text-align:center;"> Your stored recipes: </h2>
+        <br>
+    <article>
+{% for recipe in recipe_post %} 
+        <br>
+        <div class="card">
+            {% include './icons/fried_egg.svg' %}
+            <div class="card__content">
+              <p class="card__title"><a href="{% url 'recipe_detail' pk=recipe.pk %}">{{ recipe.title }}</a></p>
+            </div>
+          </div>
+          
+{% endfor %}
+{% endblock %}
 
