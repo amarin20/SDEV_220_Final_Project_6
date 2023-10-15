@@ -1,15 +1,24 @@
 from django.db import models
 from django.utils import timezone
 
+class UnitChoices(models.TextChoices):
+    TEASPOON = 'tsp', 'Teaspoon'
+    TABLESPOON = 'tbsp', 'Tablespoon'
+    CUP = 'cup', 'Cup'
+    OUNCE = 'oz', 'Ounce'
+    POUND = 'lb', 'Pound'
+    FLUID_OUNCE = 'fl oz', 'Fluid Ounce'
+    PINT = 'pint', 'Pint'
+    QUART = 'quart', 'Quart'
+    GALLON = 'gallon', 'Gallon'
+
+
 class Category(models.Model):
     name = models.CharField(max_length=225)
     
 class Ingredient(models.Model):
     name = models.CharField(max_length=225)
     cost = models.FloatField()
-    
-class equipment(models.Model):
-    name = models.CharField(max_length=225)
     
 class Recipe(models.Model):
     title = models.CharField(max_length=255)
@@ -20,7 +29,6 @@ class Recipe(models.Model):
     published_date = models.DateTimeField(blank=True, null=True)
 
     def profit_calculator(self):
-
         cost_price = 0
         recipe_indgredients = RecipeIngredient.objects.filter(recipe=self)
 
@@ -44,8 +52,13 @@ class Recipe(models.Model):
 class RecipeIngredient(models.Model):
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
     ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
-    quantity = models.CharField(max_length=255)
+    quantity = models.FloatField()
+    unit = models.CharField(max_length=50, choices=UnitChoices.choices, default=UnitChoices.OUNCE)
 
-class RecipeEquipment(models.Model):
+class RecipeStep(models.Model):
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
-    equipment = models.ForeignKey(equipment, on_delete=models.CASCADE)
+    step_number = models.PositiveIntegerField()  # Step sequence
+    step_description = models.TextField()
+    
+
+
