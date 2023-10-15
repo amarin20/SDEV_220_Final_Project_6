@@ -20,19 +20,10 @@
             <ul>
                 {% for recipe_ingredient in recipe.recipe_ingredients %}
                     <li>
-                        <span>{{ recipe_ingredient.quantity }} {{ recipe_ingredient.ingredient.name }}</span>
+                        <span>{{ recipe_ingredient.quantity }} {{ recipe_ingredient.unit}}s {{ recipe_ingredient.ingredient.name }} </span>
                         <span class="ingredient-cost">${{ recipe_ingredient.ingredient.cost }}</span>
                     </li>
                 {% endfor %}
-            </ul>
-                <h2> Recipe Equipment: </h2>
-                <ul>
-                {% for recipe_equipment in recipe.recipe_equipment %}
-                    <li>
-                        <span class="recipe-equipment">{{ recipe_equipment.equipment.name }} </span>
-                    </li>
-                {% endfor %}
-                </ul>
             </div>
         </div>
     <time> Published date: {{ recipe.published_date }} </time> 
