@@ -120,6 +120,27 @@ h3 {
   .card:hover svg {
     scale: 0;
   }
+
+.btn-secondary,
+.btn-secondary:visited {
+    color: #904C77;
+    background: none;
+    border-color: #904C77;
+    float: right;
+}
+
+.btn-secondary:hover {
+    color: #FFFFFF;
+    background-color: #904C77;
+}
   
 
-  
+.top-menu,
+.top-menu:hover,
+.top-menu:visited {
+    color: #ffffff;
+    float: right;
+    font-size: 26pt;
+    margin-right: 20px;
+}
+

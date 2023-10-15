@@ -8,7 +8,6 @@ def recipe_path(request):
     # Bypass the spreadsheet feature and redirect to the recipe list
     return redirect('recipe_list')
 
-
 def upload_recipe_view(request):
     if request.method == 'POST':
         form = UploadRecipeForm(request.POST, request.FILES)
@@ -33,7 +32,7 @@ def upload_recipe_view(request):
                         ingredient=ingredient,
                         quantity=row['quantity']  
                     )
-            return redirect('some_view_name') 
+            return redirect('upload_recipe')
     else:
         form = UploadRecipeForm()
     
@@ -41,10 +40,6 @@ def upload_recipe_view(request):
 
 def recipe_list(request):
     recipe_post = Recipe.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
-    
-    for recipe in recipe_post:
-        recipe.formatted_profit = recipe.profit_calculator()
-        recipe.recipe_ingredients = RecipeIngredient.objects.filter(recipe=recipe)
     return render(request, 'Recipehub/recipe_list.html', {'recipe_post': recipe_post})
 
 def recipe_detail(request, pk):
@@ -61,7 +56,7 @@ def recipe_create(request):
             return redirect('recipe_detail', pk=recipe.pk)
     else:
         form = RecipeForm()
-    return render(request, 'recipe_edit.html', {'form': form})
+    return render(request, 'Recipehub/recipe_edit.html', {'form': form})
 
 def recipe_edit(request, pk):
     recipe = get_object_or_404(Recipe, pk=pk)
@@ -72,7 +67,7 @@ def recipe_edit(request, pk):
             return redirect('recipe_detail', pk=recipe.pk)
     else:
         form = RecipeForm(instance=recipe)
-    return render(request, 'recipe_edit.html', {'form': form})
+    return render(request, 'Recipehub/recipe_edit.html', {'form': form})
 
 def recipe_delete(request, pk):
     recipe = get_object_or_404(Recipe, pk=pk)

@@ -8,6 +8,8 @@
     <p><em>Selling Price: {{ recipe.selling_price }}</em></p>
     <p><em>Estimated Profit: ${{ recipe.formatted_profit }}</em></p>
 
+    <br>
+
     <div class ="row"> 
         <div class="column" style="background-color:#ecb8a5;">
             <h2> Recipe Instructions: </h2>
@@ -33,7 +35,12 @@
                 </ul>
             </div>
         </div>
-    <time> Published date: {{ recipe.published_date }}</time>
+    <time> Published date: {{ recipe.published_date }} </time> 
+     <aside class="actions" style="padding-right: 27 px">
+        <a class="btn btn-secondary" href="{% url 'recipe_edit' pk=recipe.pk %}">
+          {% include './icons/pencil_square.svg' %}
+        </a>
+    </aside>
 </ARTICLE>
 <br>
 {% endblock %}

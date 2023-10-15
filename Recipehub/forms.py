@@ -1,10 +1,13 @@
 from django import forms
-from .models import Recipe 
+from .models import Recipe, RecipeIngredient
+from django.forms import inlineformset_factory
 
 class UploadRecipeForm(forms.Form):
     file = forms.FileField()
 
 class RecipeForm(forms.ModelForm):
-    class meta:
+    class Meta:
         model = Recipe
-        fields = ['title', 'sellung_price', 'category']
+        fields = ['title', 'selling_price', 'instructions', 'category',]
+
+
