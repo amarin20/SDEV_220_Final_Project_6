@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 class UnitChoices(models.TextChoices):
     TEASPOON = 'tsp', 'Teaspoon'
@@ -23,18 +24,30 @@ class Recipe(models.Model):
     title = models.CharField(max_length=255)
     selling_price = models.FloatField()
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    instructions = models.TextField()
+    created_date = models.DateTimeField(default=timezone.now)
+    published_date = models.DateTimeField(blank=True, null=True)
 
     def profit_calculator(self):
         cost_price = 0
-        recipe_ingredients = RecipeIngredient.objects.filter(recipe=self)
+        recipe_indgredients = RecipeIngredient.objects.filter(recipe=self)
 
-        for recipe_ingredient in recipe_ingredients:
-            ingredient_cost = recipe_ingredient.ingredient.cost
+        for recipe_ingredient in recipe_indgredients:
+            ingredient = recipe_ingredient.ingredient 
             quantity = float(recipe_ingredient.quantity)
+            ingredient_cost = ingredient.cost
             cost_price += quantity * ingredient_cost
 
-        profit = self.selling_price - cost_price 
-        return profit
+        profit = self.selling_price - cost_price
+        formatted_profit = "{:.2f}".format(profit)
+        return formatted_profit
+
+    def publish(self):
+        self.published_date=timezone.now()
+        self.save()
+
+    def __str__(self): 
+        return self.title
     
 class RecipeIngredient(models.Model):
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)

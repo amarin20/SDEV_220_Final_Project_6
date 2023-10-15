@@ -1,0 +1,125 @@
+.page-header {
+    padding: 5px;
+    background: #e49cab;
+}
+
+a{
+
+    color: #cd7a5c;
+    font-family: 'Quicksand';
+}
+
+
+h1 a {
+    color: white;
+    font-family: 'Kaushan Script'; 
+    padding-left: 10px;
+}
+
+
+
+body {
+    font-family: 'Quicksand';
+    font-size: 12px;   
+}
+
+
+h2 {
+    color: #957D95;
+
+}
+
+h3 {
+    color: #904c77;
+
+}
+
+* {
+    box-sizing: border-box;
+}
+.column {
+    float: left;
+    width: 50%;
+    padding: 10px;
+    height: 250px;
+}
+  
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+.ingredient-cost {
+    margin-left: 10px; 
+    color: #957D95;
+    border: .5px solid #000;
+    line-height: 1.5
+}
+
+.recipe-equipment {
+    line-height: 1.5
+}
+.card {
+    position: relative;
+    width: 600px;
+    height: 100px;
+    background-color: #ECB8A5;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    perspective: 1000px;
+    box-shadow: 0 0 0 5px #ffffff80;
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    left: 425px;
+    flex-wrap: nowrap; 
+    overflow-x: auto; 
+
+  }
+  
+  .card svg {
+    width: 48px;
+    fill: #333;
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  
+  .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(255, 255, 255, 0.2);
+  }
+  
+  .card__content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #ECCFC3;
+    transform: rotateX(-90deg);
+    transform-origin: bottom;
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  
+  .card:hover .card__content {
+    transform: rotateX(0deg);
+  }
+  
+  .card__title {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    padding-top: 10px;
+
+  }
+  
+  .card:hover svg {
+    scale: 0;
+  }
+  
+
+  
