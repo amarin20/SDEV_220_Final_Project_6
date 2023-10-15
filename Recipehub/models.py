@@ -24,7 +24,7 @@ class Recipe(models.Model):
     title = models.CharField(max_length=255)
     selling_price = models.FloatField()
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    instructions = models.TextField()
+    instructions = models.TextField(default="No instructions provided.")
     created_date = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)
 
