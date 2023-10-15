@@ -3,11 +3,13 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 from .models import Category, Ingredient, Recipe, RecipeIngredient
 from .forms import UploadRecipeForm, RecipeForm 
+from django.contrib.auth.decorators import login_required
 
 def recipe_path(request):
     # Bypass the spreadsheet feature and redirect to the recipe list
     return redirect('recipe_list')
 
+@login_required
 def upload_recipe_view(request):
     if request.method == 'POST':
         form = UploadRecipeForm(request.POST, request.FILES)
@@ -41,13 +43,13 @@ def upload_recipe_view(request):
 def recipe_list(request):
     recipe_post = Recipe.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
     return render(request, 'Recipehub/recipe_list.html', {'recipe_post': recipe_post})
-
+@login_required
 def recipe_detail(request, pk):
     recipe = get_object_or_404(Recipe, pk=pk)
     recipe.formatted_profit = recipe.profit_calculator()
     recipe.recipe_ingredients = RecipeIngredient.objects.filter(recipe=recipe)
     return render(request, 'Recipehub/recipe_detail.html', {'recipe': recipe})
-
+@login_required
 def recipe_create(request):
     if request.method == "POST":
         form = RecipeForm(request.POST)
@@ -57,7 +59,7 @@ def recipe_create(request):
     else:
         form = RecipeForm()
     return render(request, 'Recipehub/recipe_edit.html', {'form': form})
-
+@login_required
 def recipe_edit(request, pk):
     recipe = get_object_or_404(Recipe, pk=pk)
     if request.method == "POST":
@@ -68,7 +70,7 @@ def recipe_edit(request, pk):
     else:
         form = RecipeForm(instance=recipe)
     return render(request, 'Recipehub/recipe_edit.html', {'form': form})
-
+@login_required
 def recipe_delete(request, pk):
     recipe = get_object_or_404(Recipe, pk=pk)
     recipe.delete()

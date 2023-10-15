@@ -1,6 +1,6 @@
 {% extends 'Recipehub/base.html' %}
 {% block content %}
-
+{% if user.is_authenticated %}
 <ARTICLE> 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <h2>{{ recipe.title }}</h2>
@@ -40,7 +40,9 @@
         <a class="btn btn-secondary" href="{% url 'recipe_edit' pk=recipe.pk %}">
           {% include './icons/pencil_square.svg' %}
         </a>
+    
     </aside>
 </ARTICLE>
 <br>
+{% endif %}
 {% endblock %}

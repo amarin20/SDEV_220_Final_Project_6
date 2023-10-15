@@ -10,9 +10,18 @@
 <body>
     <header class="page-header">
         <div class="container">
-            <a href="{% url 'recipe_create' %}" class="top-menu">
-                {% include './icons/plus_box.svg' %}
-            </a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'recipe_create' %}" class="top-menu">
+                    {% include './icons/plus_box.svg' %}
+                </a>
+                <a href="{% url 'logout' %}" class="top-menu">
+                    {% include './icons/logout.svg' %}
+                </a>
+            {% else %}
+                <a href="{% url 'login' %}" class="top-menu">
+                    {% include './icons/login.svg' %}
+                </a>
+            {% endif %}
             <h1><a href="/">RecipeHub!</a></h1>
         </div>
     </header>

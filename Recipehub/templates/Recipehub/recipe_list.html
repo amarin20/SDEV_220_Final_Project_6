@@ -1,21 +1,36 @@
 {% extends 'Recipehub/base.html' %}
+
 {% load static %}
+
 {% block content %}
-<img src="{% static 'Recipehub/cupcake.jpg' %}" alt="cupcake!" width="1424" height="400">
+    <img src="{% static 'Recipehub/cupcake.jpg' %}" alt="cupcake!" width="1424" height="400">
     <article> 
-        <h2 style="font-size:2.2vw; text-align:center;"> Welcome to RecipeHub! Store your delicious meals and calculate your profit! </h2>
-        <h2 style="text-align:center;"> Your stored recipes: </h2>
+        <h2 style="font-size: 2.2vw; text-align: center;">Welcome to RecipeHub! Store your delicious meals and calculate your profit!</h2>
         <br>
-    <article>
-{% for recipe in recipe_post %} 
         <br>
-        <div class="card">
-            {% include './icons/fried_egg.svg' %}
-            <div class="card__content">
-              <p class="card__title"><a href="{% url 'recipe_detail' pk=recipe.pk %}">{{ recipe.title }}</a></p>
+        <hr>
+        <h2 style="text-align: center;">Your stored recipes:</h2>
+    </article>
+    {% if user.is_authenticated %}
+        {% for recipe in recipe_post %}
+            <br>
+            <div class="card">
+                {% include './icons/fried_egg.svg' %}
+                <div class="card__content">
+                    <p class="card__title"><a href="{% url 'recipe_detail' pk=recipe.pk %}">{{ recipe.title }}</a></p>
+                </div>
             </div>
-          </div>
-          
-{% endfor %}
+        {% endfor %}
+    {% else %}
+        <h2 style="text-align: center;"> no recipes in storage</h2>
+        <div class ="egg">
+            {% include './icons/egg.svg' %}
+        </div>
+        <hr>
+        <br>
+        <br>
+        <h2 style="font-size: 2.0vw; text-align: center;">Login to upload and view recipes!</h2>
+    {% endif %}
 {% endblock %}
+
 
