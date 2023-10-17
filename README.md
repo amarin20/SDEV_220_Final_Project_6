@@ -41,6 +41,13 @@ python manage.py runserver
 
 Visit http://127.0.0.1:8000/ in your browser to access the application.
 
+Test User
+You can use the following test user to explore the platform:
+
+Username: test
+Password: SDEV220
+
+
 Testing the Application
 
 To ensure the application is working as expected, follow these test cases:
